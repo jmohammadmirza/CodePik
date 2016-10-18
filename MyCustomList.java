@@ -64,25 +64,39 @@ public  class MyList<T>  extends ArrayList<Object>{
 		}
 		
 	}
+	
+	
+	
+	/**
+	 * To Display the List Elements.
+	 * Input MyList
+	 * return no
+	 * 
+	 * **/
+	public void displayList(MyList list){
+		System.out.println("\nList Elements are \n"+Arrays.toString(list.toArray()));   
+	}
+	
+	
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
-		MyList ml =new MyList();
+		MyList m1 =new MyList();
 		MyList m2 =new MyList();
 		
-		ml.add(1);
-		ml.add(2);
-		ml.add(3);
-		ml.add(4);
+		m1.add(1);
+		m1.add(2);
+		m1.add(3);
+		m1.add(4);
 		//Null Test Comment below and check
-		ml.add(null);
+		m1.add(null);
 		//
-		ml.add(5);
+		m1.add(5);
 	   // Size Test Comment below and check
-		ml.add(6);
+		m1.add(6);
 		
 		//add(index,element) Comment below and check
 		m2.add(1,null);
@@ -91,7 +105,9 @@ public  class MyList<T>  extends ArrayList<Object>{
 				
 		
 		//Print the List values 
-		 System.out.println("\nList Elements are \n"+Arrays.toString(ml.toArray()));     
+		m1.displayList(m1);
+		m2.displayList(m2);
+		// System.out.println("\nList Elements are \n"+Arrays.toString(m1.toArray()));     
         
    
 	}
