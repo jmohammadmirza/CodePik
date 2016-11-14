@@ -1,6 +1,6 @@
 Requirement 
 
-Create a Java Class that extend the List Interface / ArrayList Class.
+Create a Java Class that extend the ArrayList Class.
 The Custom List - MyList will allow only 5 elements to be inserted and will not allow null to be inserted.
 @Author Mohammad Javed , India
 *******************************************************************************************************************
