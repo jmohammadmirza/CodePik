@@ -1,0 +1,43 @@
+<html>
+<head>
+<title>Select Dropdown</title>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+ <script>
+ $(document).ready(function(){
+var options="";
+$("#fruits").on('change',function(){
+    var value=$(this).val();
+    alert(value);
+    if(value=="a")
+    {
+         options="<option>Select Your Name</option>"
+          		+"<option value='1'>rate-100</option>"
+      	 		+"<option value='2'>rate-200</option>";
+        $("#rate").html(options);
+    }
+    else if(value=="b")
+    {
+        options='<option>Select Your Name</option>'
+               +'<option value="11">rate-110</option>'
+      		   +'<option value="12">rate-120</option>';
+        $("#rate").html(options);
+    }
+    else
+        $("#rate").find('option').remove()
+});
+});
+ </script>
+ </head>
+ <body>
+ <select id="fruits">
+  <option value="">Select a item</option>
+  <option value="a">apple</option>
+  <option value="b">ball</option>
+  <option value="c">cat</option>
+ </select>
+ <select id="rate">
+ <option>Select a item</option>
+ <option> </option>
+ </select>
+ </body>
+ </html>
