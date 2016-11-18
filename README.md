@@ -1,2 +1,2 @@
-# HackerRank
-Solution to Hacker Rank
+# Solution
+Solution solved by me !
