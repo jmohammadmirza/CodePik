@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta http-equiv="cache-control" content="max-age=0" />
+<meta http-equiv="cache-control" content="no-cache" />
+<meta http-equiv="cache-control" content="no-store" />
+<meta http-equiv="expires" content="0" />
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
+<meta http-equiv="pragma" content="no-cache" />
+<title>MatchMaker Event</title>
+<meta name="keywords" content="MatchMaker Event" />
+<meta name="description" content="MatchMaker Event" />
+<link rel="shortcut icon" href="images/MM.png" />
+
+<!-- BOOTSTRAP -->
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="style/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="style/bootstrap-theme.min.css">
+
+<!-- Master CSS -->
+<link href="style/MatchMaker_Style.css" rel="stylesheet" type="text/css" />
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="js/jquery-1.10.2.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script charset="ISO-8859-1" src="https://fast.wistia.com/assets/external/E-v1.js"></script>
+
+ <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+ <!--[if lt IE 9]>
+ <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+ <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+ <![endif]-->
+
+<script type="text/javascript">
+	var MOUSE_OVER = 0, MOUSE_OUT = 1, CLICK = 2;
+	var curr_menu_id = null, curr_section_id = 1;
+
+	var canPlay = false;
+	var v = document.createElement('video');
+	if(v.canPlayType && v.canPlayType('video/mp4').replace(/no/, '')) {
+		canPlay = true;
+	}
+
+	//alert(canPlay);
+	$.ajaxSetup ({
+		// Disable caching of AJAX responses
+		cache: false
+	});
+
+	function showSection(id) {
+
+		$.get("section"+id+".html", function(data){
+			$("#matchmaker_content").html(data);
+		});
+
+		for (i = 1; i <= 11; i++) {
+			if(i!=9){
+			if (id == i) {
+				document.getElementById("menu" + i).className = "menuPage";
+			} else {
+				document.getElementById("menu" + i).className = "menu";
+			}
+			}
+		}
+
+		if (id == 1)  {document.getElementById("ramTruck").src = "images/Vehicles/RamTruck1.jpg";                                  document.getElementById("grandCherokee").src = "images/Vehicles/JeepGrandCherokee1.jpg";                         document.getElementById("Matches_Made_Instructions").style.display="none";}
+		if (id == 2)  {document.getElementById("ramTruck").src = "images/Vehicles/CH015_135TH__mid.jpg";                           document.getElementById("grandCherokee").src = "images/Vehicles/FT015_052FH__mid.jpg";                           document.getElementById("Matches_Made_Instructions").style.display="none";}
+		if (id == 3)  {document.getElementById("ramTruck").src = "images/Vehicles/CH015_246TW__mid.jpg";                           document.getElementById("grandCherokee").src = "images/Vehicles/JP015_009WR__mid.jpg";                           document.getElementById("Matches_Made_Instructions").style.display="none";}
+		if (id == 4)  {document.getElementById("ramTruck").src = "images/Vehicles/AR015_162FC__mid.jpg";                           document.getElementById("grandCherokee").src = "images/Vehicles/AR015_316FCaavqdqug45rkm0gfr53524i7pj__mid.jpg"; document.getElementById("Matches_Made_Instructions").style.display="none";}
+		if (id == 5)  {document.getElementById("ramTruck").src = "images/Vehicles/JP015_050CHi87foqah9hue3kvbmbdhga04db__mid.jpg"; document.getElementById("grandCherokee").src = "images/Vehicles/JP015_012RN__mid.jpg";                           document.getElementById("Matches_Made_Instructions").style.display="none";}
+		if (id == 6)  {document.getElementById("ramTruck").src = "images/Vehicles/RamTruck6.jpg";                                  document.getElementById("grandCherokee").src = "images/Vehicles/JeepGrandCherokee6.jpg";                         document.getElementById("Matches_Made_Instructions").style.display="none";}
+		if (id == 7)  {document.getElementById("ramTruck").src = "images/Vehicles/DG015_013VP997c66qc2s8n0q1v7isanlbea1__mid.jpg"; document.getElementById("grandCherokee").src = "images/Vehicles/CH015_001TC__mid.jpg";                           document.getElementById("Matches_Made_Instructions").style.display="none";}
+		if (id == 8)  {document.getElementById("ramTruck").src = "images/Vehicles/DG015_150CL__mid.jpg";                           document.getElementById("grandCherokee").src = "images/Vehicles/DG015_056CH__mid.jpg";                           document.getElementById("Matches_Made_Instructions").style.display="none";}
+		/* if (id == 9)  {document.getElementById("ramTruck").src = "images/Vehicles/DG015_153CL__mid.jpg";                           document.getElementById("grandCherokee").src = "images/Vehicles/DG015_148CL__mid.jpg";                           document.getElementById("Matches_Made_Instructions").style.display="none";} */
+		if (id == 10) {document.getElementById("ramTruck").src = "images/Vehicles/_MG_1736__mid.jpg";                              document.getElementById("grandCherokee").src = "images/Vehicles/3PRE2274__mid.jpg";                              document.getElementById("Matches_Made_Instructions").style.display="none";}
+		if (id == 11) {document.getElementById("ramTruck").src = "images/Vehicles/_MG_1736__mid.jpg";                              document.getElementById("grandCherokee").src = "images/Vehicles/3PRE2274__mid.jpg";                              document.getElementById("Matches_Made_Instructions").style.display="block";}
+	}
+
+	function performMenuAction(action, menuId) {
+		var menu = document.getElementById(menuId);
+		var sectionId = menu.getAttribute("sectionId");
+
+		if (sectionId == curr_section_id) {
+			return;
+		}
+
+		if (action == MOUSE_OVER) {
+			if (menu && menu != null)
+				menu.className = "menuHighlight";
+		}
+
+		if (action == MOUSE_OUT) {
+			if (menu && menu != null)
+				menu.className = "menu";
+		}
+
+		if (action == CLICK) {
+			curr_menu_id = menu.getAttribute("id");
+			showSection(sectionId);
+			curr_section_id = sectionId;
+		}
+	}
+
+	$( document ).ready(function() {
+		showSection(1);
+	});
+
+</script>
+
+<style>
+video[poster]{
+	height:100%;
+	width:100%;
+}
+
+.carousel-wrapper {
+	margin: 10px auto;
+	position: relative;
+	border: 8px solid #fff;
+	width: 400px;
+	height: 240px;
+	-webkit-border-radius: 5px;
+	   -moz-border-radius: 5px;
+	        border-radius: 5px;
+	-webkit-box-shadow: 0 0 2px #999;
+	   -moz-box-shadow: 0 0 2px #999;
+	        box-shadow: 0 0 2px #999;
+
+}
+.wrapper {
+	max-width: 620px;
+	padding: 0 20px 40px 20px;
+	margin: auto;
+}
+</style>
+
+</head>
+<body>
+		<table width="100%" cellsapcing="0" cellpadding="0" id="matchmaker_header_wrapper">
+			<tr>
+				<td style="padding-top: 2px; padding-left: 20px; padding-bottom: 0px; vertical-align: top;"><img src="images/FCA_Logo.png" width="167" /></td>
+				<td valign="middle" style="padding-top: 10px;">
+					<table width="100%" cellspacing="0" cellpadding="0" id="matchmaker_menu">
+						<tr>
+							<td nowrap="nowrap" id="menu1" sectionId="1" class="menu" onmouseover="performMenuAction(MOUSE_OVER, this.id);" onmouseOut="performMenuAction(MOUSE_OUT, this.id);" onclick="performMenuAction(CLICK, this.id);">Home</td>
+							<td nowrap="nowrap" id="menu2" sectionId="2" class="menu" onmouseover="performMenuAction(MOUSE_OVER, this.id);" onmouseOut="performMenuAction(MOUSE_OUT, this.id);" onclick="performMenuAction(CLICK, this.id);">Visitor <br />Information</td>
+							<td nowrap="nowrap" id="menu3" sectionId="3" class="menu" onmouseover="performMenuAction(MOUSE_OVER, this.id);" onmouseOut="performMenuAction(MOUSE_OUT, this.id);" onclick="performMenuAction(CLICK, this.id);">FCA US Diversity <br />Team</td>
+							<td nowrap="nowrap" id="menu4" sectionId="4" class="menu" onmouseover="performMenuAction(MOUSE_OVER, this.id);" onmouseOut="performMenuAction(MOUSE_OUT, this.id);" onclick="performMenuAction(CLICK, this.id);">Exhibitor <br />Information</td>
+							<td nowrap="nowrap" id="menu5" sectionId="5" class="menu" onmouseover="performMenuAction(MOUSE_OVER, this.id);" onmouseOut="performMenuAction(MOUSE_OUT, this.id);" onclick="performMenuAction(CLICK, this.id);">Area <br />Information</td>
+							<td nowrap="nowrap" id="menu6" sectionId="6" class="menu" onmouseover="performMenuAction(MOUSE_OVER, this.id);" onmouseOut="performMenuAction(MOUSE_OUT, this.id);" onclick="performMenuAction(CLICK, this.id);">MatchMaker <br />Mobile App</td>
+							<td nowrap="nowrap" id="menu7" sectionId="7" class="menu" onmouseover="performMenuAction(MOUSE_OVER, this.id);" onmouseOut="performMenuAction(MOUSE_OUT, this.id);" onclick="performMenuAction(CLICK, this.id);">Parking <br />Information</td>
+							<td nowrap="nowrap" id="menu8" sectionId="8" class="menu" onmouseover="performMenuAction(MOUSE_OVER, this.id);" onmouseOut="performMenuAction(MOUSE_OUT, this.id);" onclick="performMenuAction(CLICK, this.id);">Event <br />Booklet</td>
+							<!-- <td nowrap="nowrap" id="menu9" sectionId="9" class="menu" onmouseover="performMenuAction(MOUSE_OVER, this.id);" onmouseOut="performMenuAction(MOUSE_OUT, this.id);" onclick="performMenuAction(CLICK, this.id);" nowrap>ICT Team</td> -->
+							<td nowrap="nowrap" id="menu10" sectionId="10" class="menu" onmouseover="performMenuAction(MOUSE_OVER, this.id);" onmouseOut="performMenuAction(MOUSE_OUT, this.id);" onclick="performMenuAction(CLICK, this.id);">The Harmon <br />Group</td>
+							<td nowrap="nowrap" id="menu11" sectionId="11" class="menu" onmouseover="performMenuAction(MOUSE_OVER, this.id);" onmouseOut="performMenuAction(MOUSE_OUT, this.id);" onclick="performMenuAction(CLICK, this.id);">Matches <br/>Made</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table>
+		<table width="100%" cellsapcing="0" cellpadding="0" id="matchmaker_banner_wrapper">
+			<tr>
+				<td style="padding-left: 150px;">
+					<div id="matchmaker_banner_image_wrapper">
+
+					<!-- *******CAROUSEL******** -->
+						<div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-interval="3000">
+							<!-- Indicators -->
+							<ol class="carousel-indicators">
+								<li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+								<li data-target="#carousel-example-generic" data-slide-to="1"></li>
+								<li data-target="#carousel-example-generic" data-slide-to="2"></li>
+								<li data-target="#carousel-example-generic" data-slide-to="3"></li>
+							</ol>
+
+							<!-- Wrapper for slides -->
+							<div class="carousel-inner carousel-wrapper">
+								<div class="item active">
+									<img class="img-responsive" src="images/matchmaker_image_01.jpg" alt="MatchMaker">
+								</div>
+								<div class="item">
+									<img class="img-responsive" src="images/a.jpg" alt="MatchMaker">
+								</div>
+								<div class="item">
+									<img class="img-responsive" src="images/c.jpg" alt="MatchMaker">
+								</div>
+								<div class="item">
+									<img class="img-responsive" src="images/d.jpg" alt="MatchMaker">
+								</div>
+							</div>
+
+							<!-- Controls -->
+							<a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+								<span class="glyphicon glyphicon-chevron-left"></span>
+							</a>
+							<a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+								<span class="glyphicon glyphicon-chevron-right"></span>
+							</a>
+						</div>
+					</div>
+				</td>
+				<td>
+					<div id="matchmaker_banner_content">
+						<div style="vertical-align: top;">
+							<img src="images/MatchMaker_Logo.png" alt="MatchMaker" />
+						</div>
+						<div class="header_01" nowrap="nowrap">
+							17<sup>th</sup> Annual FCA US MatchMaker Event<br />Thursday September 15, 2016
+						</div>
+					</div>
+				</td>
+				<td style="vertical-align: top; padding: 2px;" align="right">
+					<img src="images/Powered_by_ICT.png" alt="Powered by ICT" width="150" />
+				</td>
+			</tr>
+		</table>
+		<table width="100%">
+			<tr>
+				<td valign="top" style = "vertical-align: top; padding-top: 50px; text-align: center;" align="center">
+					<div class="carpic">
+						<img id ="ramTruck" width="300" height ="200"/>
+						<p>&nbsp;</p>
+					</div>
+					<div id="Matches_Made_Instructions">Click <a href="resources/Matches_Made_Instructions.pdf" target="_blank">here</a>  for instructions to enter<br> monthly Match info.</div>
+				</td>
+				<td valign="top" style = "vertical-align: top; padding-top: 20px;">
+					<div id="matchmaker_content_wrapper">
+
+						<div id="matchmaker_content">
+						</div> <!-- End Of MatchMaker Content -->
+					</div> <!-- End Of MatchMaker Content Wrapper -->
+				</td>
+				<td valign="top" style = "vertical-align: top; padding-top: 50px;">
+					<div id="column_w300">
+						<div class="header_03">Save the Date</div>
+						<div class="column_w300_section_01">
+							<div class="news_image_wrapper">
+								<img src="images/registration.jpg" />
+							</div>
+
+							<div class="news_content">
+								<!--div class="news_date">Sep 11, 2015</div-->
+								<div class="header_04">
+									The 2016 MatchMaker event will be held on September 15, 2016. Registration will open on June 23, 2016.
+									<!--<a href="https://www.surveymonkey.com/s/FCA_MatchMaker" target="_blank">Registration Link</a>-->
+									<!--<a href="https://events.r20.constantcontact.com/register/eventReg?oeidk=a07eazqaepc4d1a04de&oseq=&c=&ch=" target="_blank">Registration Link</a>-->
+								</div>
+								<!--p>Click on the above link to Register</p-->
+							</div>
+							<div class="cleaner"></div>
+							<br/>
+							<p>For all questions related to MatchMaker event registration, exhibiting etc. send to <a href="mailto:fcamm@theharmongroup.com">fcamm@theharmongroup.com</a>.</p>
+						</div>
+					</div>
+
+					<br />
+					<div class="carpic">
+						<img id ="grandCherokee" src="images/Vehicles/JeepGrandCherokee1.jpg" alt="image" width="310px" height="200px"/>
+					</div>
+				</td>
+			</tr>
+			<!-- Footer -->
+			<tr>
+				<td colspan = "3" width = "100%" align = "center" valign = "middle">
+					<div style = "width:75%;border-top:1px dotted gray; border-bottom:1px dotted gray;">
+						<table width = "50%" cellspacing = "0" cellpadding = "0">
+							<tr>
+								<td style = "padding-left:5px;cursor:pointer;" onclick = "javascript:window.open('http://4c.alfaromeo.com')"><img src = "images/Logos/alfaromeo1.png" onmouseover = "this.src = 'images/Logos/alfaromeo2.png'" onmouseout = "this.src = 'images/Logos/alfaromeo1.png'"/></td>
+								<td style = "padding-left:5px;cursor:pointer;" onclick = "javascript:window.open('http://www.chrysler.com')"><img src = "images/Logos/chrysler1.png" onmouseover = "this.src = 'images/Logos/chrysler2.png'" onmouseout = "this.src = 'images/Logos/chrysler1.png'"/></td>
+								<td style = "padding-left:5px;cursor:pointer;" onclick = "javascript:window.open('http://www.dodge.com')"><img src = "images/Logos/dodge1.png" onmouseover = "this.src = 'images/Logos/dodge2.png'" onmouseout = "this.src = 'images/Logos/dodge1.png'"/></td>
+								<td style = "padding-left:5px;cursor:pointer;" onclick = "javascript:window.open('http://www.fiatusa.com')"><img src = "images/Logos/fiat1.png" onmouseover = "this.src = 'images/Logos/fiat2.png'" onmouseout = "this.src = 'images/Logos/fiat1.png'"/></td>
+								<td style = "padding-left:5px;cursor:pointer;" onclick = "javascript:window.open('http://www.jeep.com')"><img src = "images/Logos/jeep1.png" onmouseover = "this.src = 'images/Logos/jeep2.png'" onmouseout = "this.src = 'images/Logos/jeep1.png'"/></td>
+								<td style = "padding-left:5px;cursor:pointer;" onclick = "javascript:window.open('http://www.ramtrucks.com')"><img src = "images/Logos/ram1.png" onmouseover = "this.src = 'images/Logos/ram2.png'" onmouseout = "this.src = 'images/Logos/ram1.png'"/></td>
+								<td style = "padding-left:5px;cursor:pointer;" onclick = "javascript:window.open('http://www.mopar.com')"><img src = "images/Logos/mopar1.png" onmouseover = "this.src = 'images/Logos/mopar2.png'" onmouseout = "this.src = 'images/Logos/mopar1.png'"/></td>
+								<td style = "padding-left:5px;cursor:pointer;" onclick = "javascript:window.open('http://www.drivesrt.com')"><img src = "images/Logos/srt1.png" onmouseover = "this.src = 'images/Logos/srt2.png'" onmouseout = "this.src = 'images/Logos/srt1.png'"/></td>
+							</tr>
+						</table>
+					</div>
+						<p class="footer" >
+							©2016 FCA US LLC.  All Rights Reserved.
+							<br>
+							Chrysler, Dodge, Jeep, Ram, Mopar and SRT are registered trademarks of FCA US LLC.
+							<br>
+							ALFA ROMEO and FIAT are registered trademarks of Fiat Group Marketing &amp; Corporate Communication S.p.A., used with permission.
+						</p>
+				</td>
+			</tr>
+		</table>
+
+<script>
+
+//Wait until images are loaded before displaying them
+var CarImgTotal = $(".carpic img").size(); 	// get the number of images
+console.log('No. of images'+CarImgTotal);
+var imgCount = 0;
+$(".carpic img").load(function(){
+	if(++imgCount == CarImgTotal){
+		$(".carpic img").animate({
+		"opacity":1
+		});
+
+		}
+
+});
+setTimeout(function(){
+// Force the load if it doesn't happen after 2 seconds
+$(".carpic img").css("opacity","1");
+}, 2000);
+
+
+</script>
+</body>
+</html>
