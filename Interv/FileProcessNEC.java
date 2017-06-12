@@ -41,7 +41,9 @@ public class FileProcess {
 			}
 		}
 		catch(Exception e){
-		throw e;	
+		 System.out.println("Exception Occured"+e);
+		 throw e;
+			
 		}
 		finally{
 			sc.close();
