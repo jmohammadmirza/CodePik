@@ -29,7 +29,7 @@ public  class MyList<T>  extends ArrayList<Object>{
 			flag=super.add(e);
 		}
 		else{
-			if (!(e!=null))
+			if (e==null)
 			throw new RuntimeException ("MyList-Exception : Null Value not allowed  !");
 			else if(size()>=5)
 		    throw new RuntimeException ("MyList-Exception : List Size exceeded. Only 5 elements allowed !");
